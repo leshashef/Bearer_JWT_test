@@ -1,0 +1,29 @@
+﻿
+<div>
+    @*сюда передаем токен*@
+    <input id="token" type="text" />  
+
+    <input id="btc" value="отправить" type="button" onclick="getPrivatePage()" />
+
+</div>
+
+<script>
+    async function getPrivatePage() {
+        let token = document.getElementById("token").value
+
+        const response = await fetch('https://localhost:7147/api/Auth/PrivatePage', {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Authorization": "Bearer " + token  // передача токена в заголовке
+            }
+        });
+        if (response.ok === true) {
+
+            const data = await response.json();
+            alert(data)
+        }
+        else
+            console.log("Status: ", response.status);
+    }
+</script>
